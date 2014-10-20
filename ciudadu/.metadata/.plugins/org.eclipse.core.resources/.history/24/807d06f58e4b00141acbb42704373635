@@ -1,0 +1,146 @@
+package com.gestionau.admisiones.web;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+//import com.gestionau.admisiones.dominio.Estudiante;
+import com.gestionau.admisiones.service.EstudianteService;
+import com.gestionau.admisiones.dominio.Estudiante;
+//validaciones
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.springframework.validation.BindingResult;
+//import org.springframework.validation.annotation.Validated;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.transaction.annotation.Transactional;
+
+import org.springframework.validation.Validator;
+//import javax.validation.Valid;
+
+import java.util.HashMap;
+import java.util.Map;
+//import java.util.ArrayList;
+
+//import org.apache.commons.logging.Log;
+//import org.apache.commons.logging.LogFactory;
+
+@Controller
+public class EstudianteController {
+	
+	@Autowired
+	private Validator validator;
+	
+ 	@Autowired
+ //	@Qualifier("ES")
+    private EstudianteService estudianteService;
+	
+ 	@Transactional(readOnly = true)
+ 	@RequestMapping(value="/he.htm")
+ 	public  ModelAndView listEstudiante() {
+ 		
+ 		Map<String, Object> myModel = new HashMap<String, Object>();
+ 		myModel.put("estudiantes", this.estudianteService.getEstudiantes());
+ 		//ArrayList<Estudiante> Estudiantes= estudianteService.getEstudiantes();
+ 		
+ 		return new  ModelAndView("list","model",myModel);
+ 	}
+ 	//modo avanzado
+ 	@RequestMapping(value="/new.htm")
+ 	public  ModelAndView  newEstudiante() {
+ 		Estudiante estudiante=new Estudiante();
+ 		estudiante.setDocumento("72192617");
+ 		estudiante.setTipodoc("cc");
+ 		Map<String, Object> myModel = new HashMap<String, Object>();
+ 		myModel.put("estudiante", estudiante);
+ 		return  new ModelAndView ("newestudiante",myModel);	
+ 	}
+ 	
+ 	@ModelAttribute(value = "estudiante")
+	public Estudiante getEstudiante() {
+ 		Estudiante estudiante = new Estudiante();
+		
+		return estudiante;
+	}
+ 	//public ModelAndView createEstudiante(@ModelAttribute(value = "estudiante") Estudiante estudia, BindingResult bindingResult) {
+ 	//public ModelAndView createEstudiante(@Validated Estudiante estudia, BindingResult bindingResult) {
+ 	//public ModelAndView createEstudiante(@ModelAttribute(value = "estudiante") Estudiante estudia, BindingResult bindingResult, @RequestParam(value = "prueba") String p) {
+	//no public ModelAndView createEstudiante(@RequestParam(value = "estudiante") Estudiante estudia) {
+ 	@RequestMapping(value="/create.htm",method = RequestMethod.POST)
+ 	public ModelAndView createEstudiante( @ModelAttribute(value = "estudiante") Estudiante estudia, BindingResult bindingResult) {	
+ 		Map<String, Object> myModel = new HashMap<String, Object>();
+ 		//@Valid
+		//validator.validate(estudia, bindingResult);
+ 		new EstudianteValidador().validate(estudia,bindingResult);
+ 		
+ 		if (bindingResult.hasErrors()) {
+ 			estudia.setDocumento("xxxnnn");
+ 			myModel.put("x", "estudia1");
+ 		    //myModel.put("estudiante", estudia);
+ 			return new ModelAndView("newestudiante","model",myModel); //
+ 		
+ 		}
+ 		else
+ 		{if (estudia.getDocumento().equals("1"))
+ 		{   estudia.setDocumento("xxx");
+ 			
+ 			myModel.put("x", "estudia");
+ 		    //myModel.put("estudiante", estudia);
+ 			return new ModelAndView("newestudiante","model",myModel); //
+ 		}
+ 			else
+ 		return new ModelAndView("redirect:/he.htm");
+ 		}
+ 		
+ 	}
+ 	
+ 	//modo basico
+ 	@RequestMapping(value="/new1.htm")
+ 	public  ModelAndView  newEstudiante1() {
+ 		Estudiante estudiante=new Estudiante();
+ 		estudiante.setDocumento("72192617");
+ 		estudiante.setTipodoc("cc");
+ 		
+ 		Map<String, Object> myModel = new HashMap<String, Object>();
+ 		myModel.put("estudiante", estudiante);
+ 	
+ 		//return "newestudiante"
+ 		return  new ModelAndView ("newestudiante1",myModel);
+ 	}
+ 	
+ 	@RequestMapping(value="/create1.htm",method = RequestMethod.POST)
+	public ModelAndView createEstudiante1(
+			@RequestParam Map<String, String> params) {
+            
+ 		String documento = params.get("documento");
+	//	String tipodoc = params.get("tipodoc");
+		
+		if (documento.equals("1") )
+		{	Estudiante estudiante=new Estudiante();
+ 		    estudiante.setDocumento("000001");
+ 		    estudiante.setTipodoc("ti");
+ 		    Map<String, Object> myModel = new HashMap<String, Object>();
+ 	 		myModel.put("estudiante", estudiante);
+ 	 		
+ 		    return new ModelAndView("newestudiante1",myModel);
+		}	
+		else
+		   return new ModelAndView("redirect:/he.htm");
+ 	} 	
+ 	
+ 	@InitBinder
+	public void initBinder_New(WebDataBinder webDataBinder) {
+	//	logger.info("initBinder_New() method: Registering CustomDateEditor");
+		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(
+				new SimpleDateFormat("MM-dd-yyyy"), false));
+	}
+ 	
+}

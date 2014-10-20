@@ -1,0 +1,19 @@
+INDEX VERSION 1.127
+D:\todojava\ciudadu\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2575197951.index
+\admisiones\src\main\resources
+D:\todojava\ciudadu\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\544278242.index
+\matricula\src\main\resources
+D:\todojava\ciudadu\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2529722180.index
+\admisiones\src\main\java
+D:\todojava\ciudadu\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2324386117.index
+\tesoreria\src\main\resources
+D:\todojava\ciudadu\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\254217423.index
+\admisiones\src\main\java
+D:\todojava\ciudadu\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\970546242.index
+\prueba\src\main\java
+D:\todojava\ciudadu\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\304113806.index
+\admisiones\src\main\java
+D:\todojava\ciudadu\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3621399000.index
+\ciudad\src\main\resources
+D:\todojava\ciudadu\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2610423318.index
+\prueba\src\main\java

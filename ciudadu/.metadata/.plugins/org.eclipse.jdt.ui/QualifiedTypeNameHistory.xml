@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.gestionau.admisiones.dao.EstudianteDao"/>
+<fullyQualifiedTypeName name="com.gestionau.admisiones.dao.EstudianteDaoImpl"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.gestionau.admisiones.dominio.Estudiante"/>
+<fullyQualifiedTypeName name="javax.persistence.Persistence"/>
+</qualifiedTypeNameHistroy>
