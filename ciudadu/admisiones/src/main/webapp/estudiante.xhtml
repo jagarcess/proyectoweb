@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h1>Estudiante PrimeFaces</h1>
+	
+
+		<p:outputLabel for="estudianteId">Id: </p:outputLabel>
+		<p:inputText id="estudianteId" readonly="true" value="#{bean.estudiante.idestudiante}">
+		</p:inputText>
+		<br/>
+		
+		<p:outputLabel for="documento">Documento: </p:outputLabel>
+		<p:inputText id="documento" readonly="true" value="#{bean.estudiante.documento}">
+		</p:inputText>
+		<br/>
+		
+		<p:outputLabel for="fecha">Fecha: </p:outputLabel>
+		<p:inputText id="fecha" readonly="true" value="#{bean.estudiante.fecha}">
+			<f:convertDateTime dateStyle="long"/>
+		</p:inputText>
+		<br/>
+		
+		<p:outputLabel for="tipoDoc">Tipo doc: </p:outputLabel>
+		<p:inputText id="tipoDoc" readonly="true" value="#{bean.estudiante.tipodoc}"/>
+		<br/>
+		
+</h:body>
+</html>

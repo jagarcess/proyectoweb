@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h1>Formulario PrimeFaces</h1>
+	
+
+	<h:form id="form">
+		
+		<p:outputLabel for="estudianteId">Id: </p:outputLabel>
+		<!-- campo de texto ligado al campo idestudiante de la propiedad estudiante en el bean, 
+			 solo puede introducir 2 dígitos, valor requerido mandatoriamente -->
+		<p:inputText id="estudianteId" maxlength="2" required="true" value="#{bean.estudiante.idestudiante}" label="Id">
+			<!-- validación para el campo estudianteId que se encuentre entre los valores 1 y 10 -->
+			<f:validateLongRange maximum="10" minimum="1"/>
+		</p:inputText>
+		<p:message for="estudianteId" id="estudianteIdMsg"/>
+		<br/>
+		
+		<p:outputLabel for="documento">Documento: </p:outputLabel>
+		<!-- campo de texto ligado al campo documento de la propiedad estudiante en el bean,
+			 solo puede introducir 20 caracteres, requerido -->
+		<p:inputText id="documento" maxlength="20" required="true" value="#{bean.estudiante.documento}" label="Documento">
+			<!-- validación para el campo documento con expresión regular empezando solo con letras -->
+			<f:validateRegex pattern="[a-zA-Z]+\w*"/>
+		</p:inputText>
+		<p:message for="documento" id="documentodMsg"/>
+		<br/>
+		
+		<p:outputLabel for="fecha">Fecha: </p:outputLabel>
+		<!-- campo de texto ligado al campo fecha de la propiedad estudiante en el bean, 
+			 validación que solo se pueden seleccionar fechas entre 2010 y 2014 -->
+		<p:calendar id="fecha" yearRange="2010:2014" required="true" value="#{bean.estudiante.fecha}" label="Fecha"/>
+		<p:message for="fecha" id="fechaMsg"/>
+		<br/>
+		
+		<p:outputLabel for="tipoDoc">Tipo doc: </p:outputLabel>
+		<!-- campo de texto ligado al campo tipodoc de la propiedad estudiante en el bean,
+			 solo se puede introducir una letra seguida por un numero y otra letra, no mandatorio -->
+		<p:inputMask id="tipoDoc" required="false" mask="a9a" value="#{bean.estudiante.tipodoc}"/>
+		<p:message for="tipoDoc" id="tipoDocMsg"/>
+		<br/>
+		
+		<p:commandButton id="submit" action="#{bean.submit}" value="Submit" update="form"/>
+	</h:form>
+
+</h:body>
+</html>
